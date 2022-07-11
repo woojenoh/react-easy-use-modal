@@ -1,0 +1,57 @@
+{
+  "name": "react-simple-use-modal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cjs/src/index.js",
+  "module": "esm/src/index.js",
+  "types": "esm/index.d.ts",
+  "scripts": {
+    "watch": "rollup -c --watch",
+    "build": "rollup -c",
+    "pack": "rollup -c && npm pack ./build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woojenoh/react-simple-use-modal.git"
+  },
+  "author": "woojenoh <woojenoh@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/woojenoh/react-simple-use-modal/issues"
+  },
+  "homepage": "https://github.com/woojenoh/react-simple-use-modal#readme",
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^2.76.0",
+    "rollup-plugin-cleaner": "^1.0.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-progress": "^1.1.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.32.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4"
+  },
+  "peerDependencies": {
+    "@types/react": "^16.8.0",
+    "@types/react-dom": "^16.8.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  }
+}

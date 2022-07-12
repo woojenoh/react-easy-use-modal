@@ -1,14 +1,20 @@
 import { useContext } from 'react';
-import { ModalStateContext } from './ModalContext';
+import { ModalDispatchContext, ModalStateContext } from './ModalContext';
 
 function ModalRenderer() {
   const openedModals = useContext(ModalStateContext);
+  const { close } = useContext(ModalDispatchContext);
 
   return (
     <>
       {openedModals.map((modal) => {
-        const { Component, props } = modal;
-        return <Component key={Component} {...props} />;
+        const { Component, modalKey, props } = modal;
+
+        const onClose = () => {
+          close(modalKey);
+        };
+
+        return <Component key={modalKey} onClose={onClose} {...props} />;
       })}
     </>
   );

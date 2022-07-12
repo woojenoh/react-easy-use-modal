@@ -3,23 +3,24 @@ import { ModalStateContext, ModalDispatchContext } from './ModalContext';
 import ModalRenderer from './ModalRenderer';
 import { IModal } from './types';
 
-interface IModalProvderProps {
+interface IModalProviderProps {
   children: any;
   disableRenderer?: boolean;
 }
 
-function ModalProvider({ children, disableRenderer = false }: IModalProvderProps) {
+function ModalProvider({
+  children,
+  disableRenderer = false,
+}: IModalProviderProps) {
   const [openedModals, setOpenedModals] = useState<IModal[]>([]);
 
   const open = (targetModal: IModal) => {
     setOpenedModals((modals) => [...modals, targetModal]);
   };
 
-  const close = (Component: any) => {
+  const close = (modalKey: string) => {
     setOpenedModals(
-      (modals) => modals.filter(
-        (modal) => modal.Component !== Component,
-      ),
+      (modals) => modals.filter((modal) => modal.modalKey !== modalKey),
     );
   };
 

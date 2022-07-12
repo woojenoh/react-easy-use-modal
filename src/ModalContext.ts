@@ -3,7 +3,7 @@ import { IModal } from './types';
 
 interface IModalDispatchContext {
   open: (targetModal: IModal) => void;
-  close: (Component: any) => void;
+  close: (modalKey: string) => void;
   closeAll: () => void;
 }
 

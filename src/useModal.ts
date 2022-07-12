@@ -1,20 +1,29 @@
 import { useContext } from 'react';
 import { ModalDispatchContext } from './ModalContext';
 
-type TOpenModalProps<T> = T extends undefined ? void | object : T;
+interface IOpenModalFunction<TModalProps> {
+  Component: any;
+  modalKey?: string;
+  props?: TModalProps;
+}
 
-function useModal<T = undefined>(Component: any) {
+function useModal() {
   const { open, close, closeAll } = useContext(ModalDispatchContext);
 
-  const openModal = (props: TOpenModalProps<T>) => {
+  function openModal<TModalProps>({
+    Component,
+    modalKey = String(Date.now()),
+    props,
+  }: IOpenModalFunction<TModalProps>) {
     open({
       Component,
+      modalKey,
       props,
     });
-  };
+  }
 
-  const closeModal = () => {
-    close(Component);
+  const closeModal = (modalKey: string) => {
+    close(modalKey);
   };
 
   return {

@@ -1,5 +1,17 @@
 import { createContext } from 'react';
-import { IModal } from './types';
+
+export interface IModal {
+  Component: any;
+  modalKey: string;
+  props?: any;
+}
+
+interface IDefaultModalProps {
+  onClose: () => void;
+}
+
+export type TOmitModalProps<TModalProps> =
+  Omit<TModalProps & IDefaultModalProps, keyof IDefaultModalProps>;
 
 interface IModalDispatchContext {
   open: (targetModal: IModal) => void;

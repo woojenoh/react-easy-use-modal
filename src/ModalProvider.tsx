@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
-import { ModalStateContext, ModalDispatchContext } from './ModalContext';
+import { ModalStateContext, ModalDispatchContext, IModal } from './ModalContext';
 import ModalRenderer from './ModalRenderer';
-import { IModal } from './types';
 
 interface IModalProviderProps {
   children: any;

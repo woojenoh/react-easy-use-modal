@@ -17,6 +17,7 @@ function useModal() {
   }: IOpenModalFunction<TModalProps>) {
     open({
       Component,
+      isOpen: true,
       modalKey,
       props,
     });

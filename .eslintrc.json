@@ -51,6 +51,6 @@
    "@typescript-eslint/no-explicit-any": "off",
    "@typescript-eslint/member-delimiter-style": "error",
    "@typescript-eslint/ban-types": "off",
-   "max-len": "off"
+   "no-console": ["error", { "allow": ["warn", "error"] }]
   }
 }

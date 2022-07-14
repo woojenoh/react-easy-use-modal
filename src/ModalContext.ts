@@ -1,8 +1,13 @@
 import { createContext } from 'react';
 
+export interface IModals {
+  [key: string]: IModal;
+}
+
 export interface IModal {
   Component: any;
   modalKey: string;
+  isOpen: boolean;
   props?: any;
 }
 
@@ -25,4 +30,4 @@ export const ModalDispatchContext = createContext<IModalDispatchContext>({
   closeAll: () => {},
 });
 
-export const ModalStateContext = createContext<IModal[]>([]);
+export const ModalStateContext = createContext<IModals>({});

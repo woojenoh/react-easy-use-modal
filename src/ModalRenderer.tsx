@@ -7,14 +7,26 @@ function ModalRenderer() {
 
   return (
     <>
-      {openedModals.map((modal) => {
-        const { Component, modalKey, props } = modal;
+      {Object.keys(openedModals).map((key) => {
+        const {
+          Component,
+          modalKey,
+          isOpen,
+          props,
+        } = openedModals[key];
 
         const onClose = () => {
           close(modalKey);
         };
 
-        return <Component key={modalKey} onClose={onClose} {...props} />;
+        return (
+          <Component
+            key={modalKey}
+            isOpen={isOpen}
+            onClose={onClose}
+            {...props}
+          />
+        );
       })}
     </>
   );

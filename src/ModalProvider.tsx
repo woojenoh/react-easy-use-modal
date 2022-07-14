@@ -1,5 +1,10 @@
 import { useState, useMemo } from 'react';
-import { ModalStateContext, ModalDispatchContext, IModal } from './ModalContext';
+import {
+  ModalStateContext,
+  ModalDispatchContext,
+  IModals,
+  IModal,
+} from './ModalContext';
 import ModalRenderer from './ModalRenderer';
 
 interface IModalProviderProps {
@@ -11,20 +16,44 @@ function ModalProvider({
   children,
   disableRenderer = false,
 }: IModalProviderProps) {
-  const [openedModals, setOpenedModals] = useState<IModal[]>([]);
+  const [openedModals, setOpenedModals] = useState<IModals>({});
 
   const open = (targetModal: IModal) => {
-    setOpenedModals((modals) => [...modals, targetModal]);
+    setOpenedModals((modals) => ({
+      ...modals,
+      [targetModal.modalKey]: {
+        ...targetModal,
+        isOpen: true,
+      },
+    }));
   };
 
   const close = (modalKey: string) => {
-    setOpenedModals(
-      (modals) => modals.filter((modal) => modal.modalKey !== modalKey),
-    );
+    setOpenedModals((modals) => {
+      if (!modals[modalKey]) {
+        console.error('Modal does not exist.');
+        return modals;
+      }
+      return {
+        ...modals,
+        [modalKey]: {
+          ...modals[modalKey],
+          isOpen: false,
+        },
+      };
+    });
   };
 
   const closeAll = () => {
-    setOpenedModals([]);
+    setOpenedModals(
+      (modals) => Object.keys(modals).reduce((acc, key) => ({
+        ...acc,
+        [key]: {
+          ...modals[key],
+          isOpen: false,
+        },
+      }), {}),
+    );
   };
 
   const dispatch = useMemo(() => ({ open, close, closeAll }), []);

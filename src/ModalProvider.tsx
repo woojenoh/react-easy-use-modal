@@ -6,6 +6,7 @@ import {
   IModal,
 } from './ModalContext';
 import ModalRenderer from './ModalRenderer';
+import { warnReservedProperty } from './utils';
 
 interface IModalProviderProps {
   children: any;
@@ -19,6 +20,7 @@ function ModalProvider({
   const [openedModals, setOpenedModals] = useState<IModals>({});
 
   const open = (targetModal: IModal) => {
+    warnReservedProperty(targetModal.props);
     setOpenedModals((modals) => ({
       ...modals,
       [targetModal.modalKey]: {

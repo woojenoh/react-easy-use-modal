@@ -11,12 +11,13 @@ export interface IModal {
   props?: any;
 }
 
-interface IDefaultModalProps {
+export interface IReservedModalProps {
+  isOpen: boolean;
   onClose: () => void;
 }
 
-export type TOmitModalProps<TModalProps> =
-  Omit<TModalProps & IDefaultModalProps, keyof IDefaultModalProps>;
+export type TOmittedModalProps<TModalProps> =
+  Omit<TModalProps & IReservedModalProps, keyof IReservedModalProps>;
 
 interface IModalDispatchContext {
   open: (targetModal: IModal) => void;

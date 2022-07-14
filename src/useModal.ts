@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import { ModalDispatchContext, TOmitModalProps } from './ModalContext';
+import { ModalDispatchContext, TOmittedModalProps } from './ModalContext';
 
 interface IOpenModalFunction<TModalProps> {
   Component: any;
   modalKey?: string;
-  props?: TOmitModalProps<TModalProps>;
+  props?: TOmittedModalProps<TModalProps>;
 }
 
 function useModal() {

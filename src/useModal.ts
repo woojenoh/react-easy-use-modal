@@ -4,7 +4,7 @@ import { ModalDispatchContext, TOmittedModalProps } from './ModalContext';
 interface IOpenModalFunction<TModalProps> {
   Component: any;
   modalKey?: string;
-  props?: TOmittedModalProps<TModalProps>;
+  props?: TOmittedModalProps<TModalProps> | {};
 }
 
 function useModal() {
@@ -13,7 +13,7 @@ function useModal() {
   function openModal<TModalProps>({
     Component,
     modalKey = String(Date.now()),
-    props,
+    props = {},
   }: IOpenModalFunction<TModalProps>) {
     open({
       Component,

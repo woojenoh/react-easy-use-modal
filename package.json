@@ -1,5 +1,5 @@
 {
-  "name": "react-simple-use-modal",
+  "name": "react-easy-use-modal",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/woojenoh/react-simple-use-modal.git"
+    "url": "git+https://github.com/woojenoh/react-easy-use-modal.git"
   },
   "author": "woojenoh <woojenoh@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/woojenoh/react-simple-use-modal/issues"
+    "url": "https://github.com/woojenoh/react-easy-use-modal/issues"
   },
-  "homepage": "https://github.com/woojenoh/react-simple-use-modal#readme",
+  "homepage": "https://github.com/woojenoh/react-easy-use-modal#readme",
   "devDependencies": {
     "@babel/core": "^7.18.6",
     "@rollup/plugin-babel": "^5.3.1",

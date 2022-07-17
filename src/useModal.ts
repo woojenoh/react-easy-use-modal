@@ -1,11 +1,14 @@
 import { useContext } from 'react';
 import { ModalDispatchContext, TOmittedModalProps } from './ModalContext';
 
-interface IOpenModalFunction<TModalProps> {
+type TOpenModalFunction<TModalProps> = {
   Component: any;
   modalKey?: string;
-  props?: TOmittedModalProps<TModalProps> | {};
-}
+} & (TModalProps extends undefined ? {
+  props?: Record<string, any>;
+} : {
+  props: TOmittedModalProps<TModalProps>;
+});
 
 function useModal() {
   const {
@@ -16,11 +19,11 @@ function useModal() {
     removeAll,
   } = useContext(ModalDispatchContext);
 
-  function openModal<TModalProps>({
+  function openModal<TModalProps = undefined>({
     Component,
     modalKey = String(Date.now()),
     props = {},
-  }: IOpenModalFunction<TModalProps>) {
+  }: TOpenModalFunction<TModalProps>) {
     open({
       Component,
       modalKey,

@@ -8,7 +8,7 @@ export interface IModal {
   Component: any;
   modalKey: string;
   isOpen: boolean;
-  props?: any;
+  props: Record<string, any>;
 }
 
 export interface IReservedModalProps {

@@ -1,7 +1,7 @@
 {
   "name": "react-easy-use-modal",
   "version": "1.0.0",
-  "description": "",
+  "description": "Easily handle the state of the modal.",
   "main": "src/index.ts",
   "scripts": {
     "watch": "rollup -c --watch",
@@ -12,6 +12,13 @@
     "type": "git",
     "url": "git+https://github.com/woojenoh/react-easy-use-modal.git"
   },
+  "keywords": [
+    "react",
+    "modal",
+    "use-modal",
+    "context",
+    "hooks"
+  ],
   "author": "woojenoh <woojenoh@gmail.com>",
   "license": "MIT",
   "bugs": {

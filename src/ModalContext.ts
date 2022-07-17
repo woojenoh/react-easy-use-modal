@@ -12,8 +12,10 @@ export interface IModal {
 }
 
 export interface IReservedModalProps {
+  modalKey: string;
   isOpen: boolean;
   onClose: () => void;
+  onRemove: () => void;
 }
 
 export type TOmittedModalProps<TModalProps> =
@@ -23,12 +25,16 @@ interface IModalDispatchContext {
   open: (targetModal: IModal) => void;
   close: (modalKey: string) => void;
   closeAll: () => void;
+  remove: (modalKey: string) => void;
+  removeAll: () => void;
 }
 
 export const ModalDispatchContext = createContext<IModalDispatchContext>({
   open: () => {},
   close: () => {},
   closeAll: () => {},
+  remove: () => {},
+  removeAll: () => {},
 });
 
 export const ModalStateContext = createContext<IModals>({});

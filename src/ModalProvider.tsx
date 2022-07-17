@@ -6,7 +6,7 @@ import {
   IModal,
 } from './ModalContext';
 import ModalRenderer from './ModalRenderer';
-import { warnReservedProperty } from './utils';
+import { errorInvalidKey, warnReservedProperty } from './utils';
 
 interface IModalProviderProps {
   children: any;
@@ -23,17 +23,14 @@ function ModalProvider({
     warnReservedProperty(targetModal.props);
     setOpenedModals((modals) => ({
       ...modals,
-      [targetModal.modalKey]: {
-        ...targetModal,
-        isOpen: true,
-      },
+      [targetModal.modalKey]: targetModal,
     }));
   };
 
   const close = (modalKey: string) => {
     setOpenedModals((modals) => {
       if (!modals[modalKey]) {
-        console.error('Modal does not exist.');
+        errorInvalidKey();
         return modals;
       }
       return {
@@ -58,7 +55,37 @@ function ModalProvider({
     );
   };
 
-  const dispatch = useMemo(() => ({ open, close, closeAll }), []);
+  const remove = (modalKey: string) => {
+    setOpenedModals(
+      (modals) => {
+        if (!modals[modalKey]) {
+          errorInvalidKey();
+          return modals;
+        }
+        return Object.keys(modals).reduce((acc, key) => {
+          if (key === modalKey) {
+            return acc;
+          }
+          return {
+            ...acc,
+            [key]: modals[key],
+          };
+        }, {});
+      },
+    );
+  };
+
+  const removeAll = () => {
+    setOpenedModals({});
+  };
+
+  const dispatch = useMemo(() => ({
+    open,
+    close,
+    closeAll,
+    remove,
+    removeAll,
+  }), []);
 
   return (
     <ModalStateContext.Provider value={openedModals}>

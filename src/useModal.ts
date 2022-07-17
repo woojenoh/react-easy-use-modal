@@ -8,7 +8,13 @@ interface IOpenModalFunction<TModalProps> {
 }
 
 function useModal() {
-  const { open, close, closeAll } = useContext(ModalDispatchContext);
+  const {
+    open,
+    close,
+    closeAll,
+    remove,
+    removeAll,
+  } = useContext(ModalDispatchContext);
 
   function openModal<TModalProps>({
     Component,
@@ -17,8 +23,8 @@ function useModal() {
   }: IOpenModalFunction<TModalProps>) {
     open({
       Component,
-      isOpen: true,
       modalKey,
+      isOpen: true,
       props,
     });
   }
@@ -27,10 +33,16 @@ function useModal() {
     close(modalKey);
   };
 
+  const removeModal = (modalKey: string) => {
+    remove(modalKey);
+  };
+
   return {
     openModal,
     closeModal,
     closeAllModal: closeAll,
+    removeModal,
+    removeAllModal: removeAll,
   };
 }
 

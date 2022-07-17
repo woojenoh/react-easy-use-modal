@@ -3,7 +3,7 @@ import { ModalDispatchContext, ModalStateContext } from './ModalContext';
 
 function ModalRenderer() {
   const openedModals = useContext(ModalStateContext);
-  const { close } = useContext(ModalDispatchContext);
+  const { close, remove } = useContext(ModalDispatchContext);
 
   return (
     <>
@@ -19,11 +19,17 @@ function ModalRenderer() {
           close(modalKey);
         };
 
+        const onRemove = () => {
+          remove(modalKey);
+        };
+
         return (
           <Component
             key={modalKey}
+            modalKey={modalKey}
             isOpen={isOpen}
             onClose={onClose}
+            onRemove={onRemove}
             {...props}
           />
         );

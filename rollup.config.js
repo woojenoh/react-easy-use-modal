@@ -45,6 +45,7 @@ export default {
         module: 'esm/src/index.js',
         types: 'esm/index.d.ts',
         repository: pkg.repository,
+        keywords: pkg.keywords,
         author: pkg.author,
         license: pkg.license,
         bugs: pkg.bugs,
@@ -53,9 +54,7 @@ export default {
       }),
     }),
     copy({
-      targets: [
-        { src: 'README.md', dest: 'build' },
-      ],
+      targets: [{ src: 'README.md', dest: 'build' }],
     }),
   ],
 };

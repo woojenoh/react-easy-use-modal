@@ -23,7 +23,6 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  // Wrap the App with ModalProvider
   <ModalProvider>
     <App />
   </ModalProvider>
@@ -33,23 +32,18 @@ root.render(
 ### App.tsx
 
 ```ts
-import { useModal } from "react-easy-use-modal";
+import { ModalProps, useModal } from "react-easy-use-modal";
 import ReactModal from "react-modal";
 
-interface IMyModalProps {
-  // Component props
+interface MyModalProps extends ModalProps {
   text: string;
-
-  // Reserved props
-  isOpen: boolean;
-  onClose: () => void;
 }
 
-const MyModal = ({ text, isOpen, onClose }: IMyModalProps) => {
+const MyModal = ({ text, isOpen, onClose }: MyModalProps) => {
   return (
     <ReactModal isOpen={isOpen}>
-      <span>{text}</span>
-      <button onClick={onClose}>close</button>
+      <p>{text}</p>
+      <button onClick={onClose}>Close</button>
     </ReactModal>
   );
 };
@@ -58,10 +52,10 @@ function App() {
   const { openModal } = useModal();
 
   const handleClick = () => {
-    openModal<IMyModalProps>({
-      Component: MyModal,
+    openModal<MyModalProps>({
+      component: MyModal,
       props: {
-        text: "Hello world!",
+        text: "Hello World!",
       },
     });
   };

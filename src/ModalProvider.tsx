@@ -1,42 +1,41 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, ReactNode } from 'react';
 import {
   ModalStateContext,
   ModalDispatchContext,
-  IModals,
-  IModal,
 } from './ModalContext';
 import ModalRenderer from './ModalRenderer';
 import { errorInvalidKey, warnReservedProperty } from './utils';
+import { Modal, Modals } from './types';
 
-interface IModalProviderProps {
-  children: any;
+interface ModalProviderProps {
+  children: ReactNode;
   disableRenderer?: boolean;
 }
 
 function ModalProvider({
   children,
   disableRenderer = false,
-}: IModalProviderProps) {
-  const [openedModals, setOpenedModals] = useState<IModals>({});
+}: ModalProviderProps) {
+  const [modals, setModals] = useState<Modals>({});
 
-  const open = (targetModal: IModal) => {
+  const open = (targetModal: Modal) => {
     warnReservedProperty(targetModal.props);
-    setOpenedModals((modals) => ({
-      ...modals,
+    setModals((currentModals) => ({
+      ...currentModals,
       [targetModal.modalKey]: targetModal,
     }));
   };
 
   const close = (modalKey: string) => {
-    setOpenedModals((modals) => {
-      if (!modals[modalKey]) {
+    setModals((currentModals) => {
+      if (!currentModals[modalKey]) {
         errorInvalidKey();
-        return modals;
+        return currentModals;
       }
       return {
-        ...modals,
+        ...currentModals,
         [modalKey]: {
-          ...modals[modalKey],
+          ...currentModals[modalKey],
           isOpen: false,
         },
       };
@@ -44,11 +43,11 @@ function ModalProvider({
   };
 
   const closeAll = () => {
-    setOpenedModals(
-      (modals) => Object.keys(modals).reduce((acc, key) => ({
+    setModals(
+      (currentModals) => Object.keys(currentModals).reduce((acc, key) => ({
         ...acc,
         [key]: {
-          ...modals[key],
+          ...currentModals[key],
           isOpen: false,
         },
       }), {}),
@@ -56,19 +55,19 @@ function ModalProvider({
   };
 
   const remove = (modalKey: string) => {
-    setOpenedModals(
-      (modals) => {
-        if (!modals[modalKey]) {
+    setModals(
+      (currentModals) => {
+        if (!currentModals[modalKey]) {
           errorInvalidKey();
-          return modals;
+          return currentModals;
         }
-        return Object.keys(modals).reduce((acc, key) => {
+        return Object.keys(currentModals).reduce((acc, key) => {
           if (key === modalKey) {
             return acc;
           }
           return {
             ...acc,
-            [key]: modals[key],
+            [key]: currentModals[key],
           };
         }, {});
       },
@@ -76,7 +75,7 @@ function ModalProvider({
   };
 
   const removeAll = () => {
-    setOpenedModals({});
+    setModals({});
   };
 
   const dispatch = useMemo(() => ({
@@ -88,7 +87,7 @@ function ModalProvider({
   }), []);
 
   return (
-    <ModalStateContext.Provider value={openedModals}>
+    <ModalStateContext.Provider value={modals}>
       <ModalDispatchContext.Provider value={dispatch}>
         {children}
         {!disableRenderer && <ModalRenderer />}

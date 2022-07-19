@@ -1,13 +1,14 @@
-import { useContext } from 'react';
-import { ModalDispatchContext, TOmittedModalProps } from './ModalContext';
+import { ComponentType, useContext } from 'react';
+import { ModalDispatchContext } from './ModalContext';
+import { ModalComponentProps } from './types';
 
-type TOpenModalFunction<TModalProps> = {
-  Component: any;
+type OpenModalFunction<ModalProps> = {
+  component: ComponentType<any>;
   modalKey?: string;
-} & (TModalProps extends undefined ? {
+} & (ModalProps extends undefined ? {
   props?: Record<string, any>;
 } : {
-  props: TOmittedModalProps<TModalProps>;
+  props: ModalComponentProps<ModalProps>;
 });
 
 function useModal() {
@@ -19,13 +20,13 @@ function useModal() {
     removeAll,
   } = useContext(ModalDispatchContext);
 
-  function openModal<TModalProps = undefined>({
-    Component,
+  function openModal<ModalProps = undefined>({
+    component,
     modalKey = String(Date.now()),
     props = {},
-  }: TOpenModalFunction<TModalProps>) {
+  }: OpenModalFunction<ModalProps>) {
     open({
-      Component,
+      component,
       modalKey,
       isOpen: true,
       props,

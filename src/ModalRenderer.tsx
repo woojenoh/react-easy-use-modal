@@ -2,18 +2,18 @@ import { useContext } from 'react';
 import { ModalDispatchContext, ModalStateContext } from './ModalContext';
 
 function ModalRenderer() {
-  const openedModals = useContext(ModalStateContext);
+  const modals = useContext(ModalStateContext);
   const { close, remove } = useContext(ModalDispatchContext);
 
   return (
     <>
-      {Object.keys(openedModals).map((key) => {
+      {Object.keys(modals).map((key) => {
         const {
-          Component,
+          component: Component,
           modalKey,
           isOpen,
           props,
-        } = openedModals[key];
+        } = modals[key];
 
         const onClose = () => {
           close(modalKey);

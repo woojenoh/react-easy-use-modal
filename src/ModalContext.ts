@@ -1,35 +1,15 @@
 import { createContext } from 'react';
+import { Modal, Modals } from './types';
 
-export interface IModals {
-  [key: string]: IModal;
-}
-
-export interface IModal {
-  Component: any;
-  modalKey: string;
-  isOpen: boolean;
-  props: Record<string, any>;
-}
-
-export interface IReservedModalProps {
-  modalKey: string;
-  isOpen: boolean;
-  onClose: () => void;
-  onRemove: () => void;
-}
-
-export type TOmittedModalProps<TModalProps> =
-  Omit<TModalProps & IReservedModalProps, keyof IReservedModalProps>;
-
-interface IModalDispatchContext {
-  open: (targetModal: IModal) => void;
+interface ModalDispatch {
+  open: (targetModal: Modal) => void;
   close: (modalKey: string) => void;
   closeAll: () => void;
   remove: (modalKey: string) => void;
   removeAll: () => void;
 }
 
-export const ModalDispatchContext = createContext<IModalDispatchContext>({
+export const ModalDispatchContext = createContext<ModalDispatch>({
   open: () => {},
   close: () => {},
   closeAll: () => {},
@@ -37,4 +17,4 @@ export const ModalDispatchContext = createContext<IModalDispatchContext>({
   removeAll: () => {},
 });
 
-export const ModalStateContext = createContext<IModals>({});
+export const ModalStateContext = createContext<Modals>({});

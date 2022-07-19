@@ -1,8 +1,8 @@
-import { IReservedModalProps } from './ModalContext';
+import { ReservedModalProps } from './types';
 
 const getVariableName = (object: any) => Object.keys(object)[0];
 
-export const warnReservedProperty = (props: Partial<IReservedModalProps>) => {
+export const warnReservedProperty = (props: Partial<ReservedModalProps>) => {
   const {
     modalKey,
     isOpen,
